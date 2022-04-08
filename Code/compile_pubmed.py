@@ -1,0 +1,153 @@
+from Bio import Entrez, Medline
+import pandas as pd
+
+
+
+#temp placeholders while being lazy about argparse
+Entrez.email = 'adam.hockenberry@tempus.com'
+#TOGGLE ME
+search_term = 'tempus'
+#search_term = 'guardant'
+infile_directory = '../Data'
+outfile_directory = '../Results'
+
+
+def get_max_pubmed_records(search_term):
+    '''
+
+    '''
+    max_records = 0
+    handle = Entrez.egquery(term='{}[ad]'.format(search_term))
+    record = Entrez.read(handle)
+    for row in record['eGQueryResult']:
+        if row['DbName'] == 'pubmed':
+            max_records = int(row['Count'])
+    return max_records
+
+def gather_pmids(search_term, max_records):
+    '''
+    
+    '''
+    handle = Entrez.esearch(db='pubmed', term='{}[ad]'.format(search_term), retmax=max_records)
+    record = Entrez.read(handle)
+    handle.close()
+    #Look at the PMID list
+    id_list = record['IdList']
+    assert len(id_list) == max_records 
+    #Then do a fetch to return the text data for each record
+    handle = Entrez.efetch(db="pubmed", id=id_list, rettype="medline",
+                            retmode="text")
+    medline_records = list(Medline.parse(handle))
+    assert len(medline_records) == max_records
+    return medline_records
+
+def read_filter_file(search_term):    
+    '''
+    
+    '''
+    try:
+        with open('{}/{}_removal.txt'.format(infile_directory, '_'.join(search_term.split(' ')), 'r') as infile:
+            filtered_affils = infile.read().splitlines()
+            print('Found {} existing affiliation strings to remove from consideration:'.format(len(filtered_affils)))
+    except FileNotFoundError:
+        print('Did not find any previous file so starting afresh')
+        filtered_affils = []
+    return filtered_affils
+
+
+def filter_results(search_term, medline_records, filtered_affils):
+    '''
+
+    '''
+    valid_affils = []
+    valid_ids = []
+    for record in medline_records:
+        affil_of_interest = 0
+        for affil in record['AD']:
+            if search_term in affil.lower():
+                tempy = affil.lower()
+                for error in filtered_affils:
+                    tempy = tempy.replace(error, '***')
+                if search_term in tempy:            
+                    valid_affils.append(affil)
+        if affil_of_interest > 0:
+            valid_ids.append(record['PMID'])     
+    #Should probably write this list to a file rather than screen print
+    print('Affiliations that remain and will be considered valid:')
+    print()
+    valid_affils = list(set(valid_affils))
+    for i in valid_affils:
+        print(i)
+    return valid_ids 
+
+def fetch_xml_records(valid_ids):
+    handle = Entrez.efetch(db="pubmed", id=valid_ids, rettype="medline",
+                        retmode="xml")
+    xml_records = Entrez.read(handle)
+    return xml_records
+
+def construct_df(xml_records):
+    '''
+    
+    '''
+    pmids = []
+    titles = []
+    dois = []
+    journals = []
+    years_journal = []
+    volumes = []
+    issues = []
+    n_authors = []
+    n_affil_authors = []
+    affil_author_names = []
+    for record in xml_records['PubmedArticle']:
+        pmids.append(int(record['MedlineCitation']['PMID']))
+        titles.append(record['MedlineCitation']['Article'].get('ArticleTitle'))
+        journals.append(record['MedlineCitation']['Article']['Journal'].get('Title', ''))
+        years_journal.append(record['MedlineCitation']['Article']['Journal']['JournalIssue']['PubDate'].get('Year', ''))
+        volumes.append(record['MedlineCitation']['Article']['Journal']['JournalIssue'].get('Volume', ''))
+        issues.append(record['MedlineCitation']['Article']['Journal']['JournalIssue'].get('Issue', ''))
+        ###DOI is a bit more complicated
+        doi = ''
+        for item in record['MedlineCitation']['Article']['ELocationID']:
+            if item.attributes['EIdType']=='doi':
+                doi = str(item)
+        dois.append(doi)
+        ###Authorship gets really complicated
+        total_authors = 0
+        affil_authors = 0
+        affil_author_list = []
+        for person in record['MedlineCitation']['Article']['AuthorList']:
+            affil_author = False
+            ln = person.get('LastName', '')
+            if ln == '':
+                continue
+            total_authors += 1
+            name = (person['LastName']+' '+person['ForeName']).replace(' ', '_')
+            affiliations = person['AffiliationInfo']
+            for affiliation in affiliations:
+                if affiliation['Affiliation'] in possible_names:
+                    affil_author=True
+            if affil_author:
+                affil_authors += 1
+                affil_author_list.append(name)
+        ###Finally adding
+        n_authors.append(total_authors)
+        n_affil_authors.append(affil_authors)
+        affil_author_names.append('; '.join(affil_author_list))
+        pubs_df = pd.DataFrame(zip(pmids, titles, dois, journals, years_journal, volumes, issues, n_authors, n_affil_authors, affil_author_names),\
+                columns = ['PMID', 'Title', 'DOI', 'Journal', 'Year', 'Volume', 'Issue',\
+                'Total_author_count', 'Affiliated_author_count', 'Affiliated_author_names'])
+        return pubs_df
+
+if __name__ == 'main':
+    #Obvs need to get argparser working here
+
+    filtered_affils = read_filter_file(search_term)
+    max_records = get_max_pubmed_records(search_term)
+    medline_records = gather_pmids(search_term, max_records)
+    valid_ids = filter_results(search_term, medline_records, filtered_affils)
+    xml_records = fetcm_xml_records(valid_ids)
+    pubs_df = construct_df(xml_records)
+    pubs_df = pubs_df.sort_values('Year', ascending=False)
+    pubs_df.to_csv('{}/{}.tsv'.format(outfile_directory, '_'.join(search_term.split(' '))), index=False, sep='\t')

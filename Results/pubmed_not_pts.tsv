@@ -1,0 +1,56 @@
+PMID	Title	DOI	Journal	Year	Volume	Issue	Total_author_count	Affiliated_author_count	Affiliated_author_names
+35319967	Landscape of <i>KRAS</i><sup>G12C</sup>, Associated Genomic Alterations, and Interrelation With Immuno-Oncology Biomarkers in <i>KRAS</i>-Mutated Cancers.	10.1200/PO.21.00245	JCO precision oncology	2022	6.0		15	3	El-Refai_Sherif_M; O'Neil_Bert; Barrett_Alexander_S
+35274707	Homologous Recombination Deficiency: Concepts, Definitions, and Assays.	10.1093/oncolo/oyab053	The oncologist	2022	27.0	3.0	25	2	Beaubier_Nike; Parsons_Jerod
+34663898	Predicting cancer outcomes with radiomics and artificial intelligence in radiology.	10.1038/s41571-021-00560-7	Nature reviews. Clinical oncology	2022	19.0	2.0	5	1	Braman_Nathaniel
+34714709	Exercise is Medicine: Implementing a New Initiative to Increase Patients' Activity and Functional Mobility in Pediatric Stem-Cell Transplant Unit.	10.1200/OP.21.00199	JCO oncology practice	2022	18.0	3.0	6	1	Munger_Jessica
+34801336	"Corrigendum to ""Identification of Differential Tumor Subtypes of T1 Bladder Cancer"" [Eur. Urol. 78 (2020) 533-537]."	10.1016/j.eururo.2021.11.001	European urology	2022	81.0	2.0	17	1	Taxter_Timothy_J
+34664259	The Friends of Cancer Research Real-World Data Collaboration Pilot 2.0: Methodological Recommendations from Oncology Case Studies.	10.1002/cpt.2453	Clinical pharmacology and therapeutics	2022	111.0	1.0	27	2	Honnold_Rebecca; Pe_Benito_Ruth
+34998516	Continuous action deep reinforcement learning for propofol dosing during general anesthesia.	10.1016/j.artmed.2021.102227	Artificial intelligence in medicine	2022	123.0		5	1	Badgeley_Marcus
+35134211	Racial and Ethnic Differences in Genomic Profiling of Early-Onset Colorectal Cancer.	10.1093/jnci/djac014	Journal of the National Cancer Institute	2022			11	2	Rhead_Brooke; De_La_Vega_Francisco_M
+35171659	Real-World Experience of <i>NTRK</i> Fusion-Positive Thyroid Cancer.	10.1200/PO.21.00442	JCO precision oncology	2022	6.0		4	1	Ashok_Arya
+35233056	Crizotinib in patients with tumors harboring ALK or ROS1 rearrangements in the NCI-MATCH trial.	10.1038/s41698-022-00256-w	NPJ precision oncology	2022	6.0	1.0	29	1	Malik_N
+33637709	Chromatin information content landscapes inform transcription factor and DNA interactions.	10.1038/s41467-021-21534-4	Nature communications	2021	12.0	1.0	7	1	Kyono_Yasuhiro
+33625877	OncoTree: A Cancer Classification System for Precision Oncology.	10.1200/CCI.20.00108	JCO clinical cancer informatics	2021	5.0		66	1	Sanchez_Iker_Huerga
+33619384	The NCI Genomic Data Commons.	10.1038/s41588-021-00791-5	Nature genetics	2021	53.0	3.0	91	1	Pedrosa_Jesús
+33337916	Contemporary Clinical Trials Office: Doing More With Less.	10.1200/OP.20.00871	JCO oncology practice	2021	17.0	1.0	2	1	Carson_Kenneth_R
+33875798	Interpretable survival prediction for colorectal cancer using deep learning.	10.1038/s41746-021-00427-2	NPJ digital medicine	2021	4.0	1.0	23	1	Stumpe_Martin_C
+34788103	Patient similarity network of newly diagnosed multiple myeloma identifies patient subgroups with distinct genetic features and clinical implications.	10.1126/sciadv.abg9551	Science advances	2021	7.0	47.0	17	1	Dudley_Joel_T
+34012068	ACMG SF v3.0 list for reporting of secondary findings in clinical exome and genome sequencing: a policy statement of the American College of Medical Genetics and Genomics (ACMG).	10.1038/s41436-021-01172-3	Genetics in medicine : official journal of the American College of Medical Genetics	2021	23.0	8.0	18	1	Vlangos_Christopher_N
+34380723	Cross-sectional study of correlates and prevalence of functional and high-risk multimorbidity in an academic HIV practice in New York City.	10.1136/bmjopen-2020-047199	BMJ open	2021	11.0	8.0	4	1	Mauer_Elizabeth
+34430931	"Preview of ""Interpretable systems biomarkers predict response to immune-checkpoint inhibitors""."	10.1016/j.patter.2021.100313	Patterns (New York, N.Y.)	2021	2.0	8.0	1	1	Guinney_Justin
+34635154	Integrative epigenomic and high-throughput functional enhancer profiling reveals determinants of enhancer heterogeneity in gastric cancer.	10.1186/s13073-021-00970-3	Genome medicine	2021	13.0	1.0	24	1	White_Kevin_P
+34643931	Review of the genomic landscape of common pediatric CNS tumors and how data sharing will continue to shape this landscape in the future.	10.1007/s11033-021-06811-1	Molecular biology reports	2021	48.0	11.0	2	1	Kaneva_Kristiyana
+34941024	Viral Dynamics of SARS-CoV-2 Variants in Vaccinated and Unvaccinated Persons.	10.1056/NEJMc2102507	The New England journal of medicine	2021	385.0	26.0	19	8	Metti_Jessica; Khullar_Gaurav; Baits_Rachel; MacKay_Matthew; Salgado_Daisy; Baker_Tim; Dudley_Joel_T; Mason_Christopher_E
+34836952	Whole-genome analysis of Nigerian patients with breast cancer reveals ethnic-driven somatic evolution and distinct genomic subtypes.	10.1038/s41467-021-27079-w	Nature communications	2021	12.0	1.0	28	1	White_Kevin_P
+32282793	DRAMS: A tool to detect and re-align mixed-up samples for integrative studies of multi-omics data.	10.1371/journal.pcbi.1007522	PLoS computational biology	2020	16.0	4.0	14	1	White_Kevin_P
+32364535	Genomic and epigenomic EBF1 alterations modulate TERT expression in gastric cancer.	10.1172/JCI126726	The Journal of clinical investigation	2020	130.0	6.0	46	1	White_Kevin
+32000215	Retrospective Cohort: Genomic Differences Between Pigmented Spindle Cell Nevi of Reed and Reed-Like Melanomas.	10.1097/DAD.0000000000001603	The American Journal of dermatopathology	2020	42.0	9.0	15	4	Isales_Maria_Cristina; Beaubier_Nike; Taxter_Timothy_J; White_Kevin_P
+31542774	Integrated paired-end enhancer profiling and whole-genome sequencing reveals recurrent <i>CCNE1</i> and <i>IGF2</i> enhancer hijacking in primary gastric adenocarcinoma.	10.1136/gutjnl-2018-317612	Gut	2020	69.0	6.0	26	1	White_Kevin_P
+32383249	Clinical validity of expanded carrier screening: Evaluating the gene-disease relationship in more than 200 conditions.	10.1002/humu.24033	Human mutation	2020	41.0	8.0	10	1	Beauchamp_Kyle
+32728249	Expanded encyclopaedias of DNA elements in the human and mouse genomes.	10.1038/s41586-020-2493-4	Nature	2020	583.0	7818.0	63	1	White_Kevin_P
+32728046	An integrative ENCODE resource for cancer genomics.	10.1038/s41467-020-14743-w	Nature communications	2020	11.0	1.0	58	1	White_Kevin_P
+33077832	Automated microfluidic platform for dynamic and combinatorial drug screening of tumor organoids.	10.1038/s41467-020-19058-4	Nature communications	2020	11.0	1.0	10	1	White_Kevin_P
+33205120	Identification of Intrinsic Drug Resistance and Its Biomarkers in High-Throughput Pharmacogenomic and CRISPR Screens.	10.1016/j.patter.2020.100065	Patterns (New York, N.Y.)	2020	1.0	5.0	10	1	Dry_Jonathan_R
+33242405	Clonal Hematopoiesis Before, During, and After Human Spaceflight.	10.1016/j.celrep.2020.108458	Cell reports	2020	33.0	10.0	20	1	Hassane_Duane_C
+33242416	Fundamental Biological Features of Spaceflight: Advancing the Field to Enable Deep-Space Exploration.	10.1016/j.cell.2020.10.050	Cell	2020	183.0	5.0	38	1	Hassane_Duane
+33292397	STARRPeaker: uniform processing and accurate identification of STARR-seq active regions.	10.1186/s13059-020-02194-x	Genome biology	2020	21.0	1.0	11	5	Shi_Manman; Moran_Jennifer; Wall_Martha; Kyono_Yasuhiro; White_Kevin_P
+32684305	Identification of Differential Tumor Subtypes of T1 Bladder Cancer.	10.1016/j.eururo.2020.06.048	European urology	2020	78.0	4.0	17	1	Taxter_Timothy_J
+30128536	Association of Breast and Ovarian Cancers With Predisposition Genes Identified by Large-Scale Sequencing.	10.1001/jamaoncol.2018.2956	JAMA oncology	2019	5.0	1.0	17	1	Huether_Robert
+30171177	Human Organoids Share Structural and Genetic Features with Primary Pancreatic Adenocarcinoma Tumors.	10.1158/1541-7786.MCR-18-0531	Molecular cancer research : MCR	2019	17.0	1.0	20	3	Ugolkov_Andrey; Zhang_Yilin; White_Kevin_P
+31162949	Clinical Relevance of Noncoding Adenosine-to-Inosine RNA Editing in Multiple Human Cancers.	10.1200/CCI.18.00151	JCO clinical cancer informatics	2019	3.0		4	1	White_Kevin_P
+31173346	Germline variants and somatic mutation signatures of breast cancer across populations of African and European ancestry in the US and Nigeria.	10.1002/ijc.32498	International journal of cancer	2019	145.0	12.0	22	1	White_Kevin_P
+31406351	An augmented reality microscope with real-time artificial intelligence integration for cancer diagnosis.	10.1038/s41591-019-0539-7	Nature medicine	2019	25.0	9.0	12	1	Stumpe_Martin_C
+29279606	Nuclear receptors in cancer - uncovering new and evolving roles through genomic analysis.	10.1038/nrg.2017.102	Nature reviews. Genetics	2018	19.0	3.0	3	1	White_Kevin_P
+31544169	Prolonged Partial Response to Bevacizumab and Valproic Acid in a Patient With Glioblastoma.	10.1200/PO.18.00282	JCO precision oncology	2018	2.0		4	1	Palmer_Gary
+29662209	Dynamic coupling between conformations and nucleotide states in DNA gyrase.	10.1038/s41589-018-0037-0	Nature chemical biology	2018	14.0	6.0	7	1	Fernandes_Louis_E
+29728604	Integrated molecular subtyping defines a curable oligometastatic state in colorectal liver metastasis.	10.1038/s41467-018-04278-6	Nature communications	2018	9.0	1.0	25	1	White_Kevin_P
+30545964	The transcription factor POU3F2 regulates a gene coexpression network in brain tissue from patients with psychiatric disorders.	10.1126/scitranslmed.aat8178	Science translational medicine	2018	10.0	472.0	27	1	White_Kevin_P
+30327465	Characterization of Nigerian breast cancer reveals prevalent homologous recombination deficiency and aggressive molecular features.	10.1038/s41467-018-06616-0	Nature communications	2018	9.0	1.0	54	1	White_Kevin_P
+30545965	The <i>DGCR5</i> long noncoding RNA may regulate expression of several schizophrenia-related genes.	10.1126/scitranslmed.aat6912	Science translational medicine	2018	10.0	472.0	17	1	White_Kevin_P
+29151363	Functional assessment of human enhancer activities using whole-genome STARR-sequencing.	10.1186/s13059-017-1345-5	Genome biology	2017	18.0	1.0	6	1	White_Kevin_P
+29089486	Pan-cancer analysis of homozygous deletions in primary tumours uncovers rare tumour suppressors.	10.1038/s41467-017-01355-0	Nature communications	2017	8.0	1.0	18	1	White_Kevin_P
+29061142	Systematic identification of regulatory variants associated with cancer risk.	10.1186/s13059-017-1322-z	Genome biology	2017	18.0	1.0	9	1	White_Kevin_P
+28263985	Robust stratification of breast cancer subtypes using differential patterns of transcript isoform expression.	10.1371/journal.pgen.1006589	PLoS genetics	2017	13.0	3.0	9	1	White_Kevin_P
+28052920	Evolution of transcript modification by <i>N</i><sup>6</sup>-methyladenosine in primates.	10.1101/gr.212563.116	Genome research	2017	27.0	3.0	8	1	White_Kevin_P
+27931250	Tracing the origin of disseminated tumor cells in breast cancer using single-cell sequencing.		Genome biology	2016	17.0	1.0	20	1	White_Kevin_P
+27614579	A novel high-throughput multi-parameter flow cytometry based method for monitoring and rapid characterization of microbiome dynamics in anaerobic systems.	10.1016/j.biortech.2016.08.076	Bioresource technology	2016	220.0		6	1	Dolatowski_William
