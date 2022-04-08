@@ -5,48 +5,66 @@ import pandas as pd
 
 #temp placeholders while being lazy about argparse
 Entrez.email = 'adam.hockenberry@tempus.com'
-#TOGGLE ME
 search_term = 'tempus'
 #search_term = 'guardant'
 infile_directory = '../Data'
 outfile_directory = '../Results'
 
 
-def get_max_pubmed_records(search_term):
+
+def get_max_records(search_termm, db='pubmed'):
     '''
+    Owing to some intricacies of pubmed, subsequent sesarches have a retmax argument so we need to specify
+    the expected number of hits first to ensure we retrieve all records.
+    
+    Inputs:
+        search_term : str
+
+    Outputs:
+        max_records : int
 
     '''
     max_records = 0
     handle = Entrez.egquery(term='{}[ad]'.format(search_term))
     record = Entrez.read(handle)
+    handle.close()
     for row in record['eGQueryResult']:
-        if row['DbName'] == 'pubmed':
+        if row['DbName'] == db:
             max_records = int(row['Count'])
     return max_records
 
-def gather_pmids(search_term, max_records):
+def gather_medline_records(search_term, max_records):
     '''
-    
+    Uses esearch to retrieve medline formatted records.
+
+    Inputs:
+        search_term : str
+        max_records : int
+    Outputs:
+        medline_records : a list
     '''
     handle = Entrez.esearch(db='pubmed', term='{}[ad]'.format(search_term), retmax=max_records)
     record = Entrez.read(handle)
     handle.close()
-    #Look at the PMID list
     id_list = record['IdList']
     assert len(id_list) == max_records 
-    #Then do a fetch to return the text data for each record
+    
+    #Do a fetch to return the text data for each record
     handle = Entrez.efetch(db="pubmed", id=id_list, rettype="medline",
                             retmode="text")
     medline_records = list(Medline.parse(handle))
     assert len(medline_records) == max_records
     return medline_records
 
-def read_filter_file(search_term):    
+def read_filter_file(filter_file):    
     '''
-    
+    Inputs:
+        filter_file : str (path to existing file)
+    Outputs:
+        filtered_affils : list of strs
     '''
     try:
-        with open('{}/{}_removal.txt'.format(infile_directory, '_'.join(search_term.split(' ')), 'r') as infile:
+        with open(filter_file, 'r') as infile:
             filtered_affils = infile.read().splitlines()
             print('Found {} existing affiliation strings to remove from consideration:'.format(len(filtered_affils)))
     except FileNotFoundError:
@@ -143,9 +161,10 @@ def construct_df(xml_records):
 if __name__ == 'main':
     #Obvs need to get argparser working here
 
-    filtered_affils = read_filter_file(search_term)
+    filter_file = '{}/{}_removal.txt'.format(infile_directory, '_'.join(search_term.split(' '))
+    filtered_affils = read_filter_file(filter_file)
     max_records = get_max_pubmed_records(search_term)
-    medline_records = gather_pmids(search_term, max_records)
+    medline_records = gather_medline_records(search_term, max_records)
     valid_ids = filter_results(search_term, medline_records, filtered_affils)
     xml_records = fetcm_xml_records(valid_ids)
     pubs_df = construct_df(xml_records)
