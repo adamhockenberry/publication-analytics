@@ -2,7 +2,6 @@ from Bio import Entrez, Medline
 import pandas as pd
 
 
-
 #temp placeholders while being lazy about argparse
 Entrez.email = 'adam.hockenberry@tempus.com'
 search_term = 'tempus'
@@ -12,7 +11,7 @@ outfile_directory = '../Results'
 
 
 
-def get_max_records(search_termm, db='pubmed'):
+def get_max_pubmed_records(search_termm, db='pubmed'):
     '''
     Owing to some intricacies of pubmed, subsequent sesarches have a retmax argument so we need to specify
     the expected number of hits first to ensure we retrieve all records.
@@ -88,15 +87,16 @@ def filter_results(search_term, medline_records, filtered_affils):
                     tempy = tempy.replace(error, '***')
                 if search_term in tempy:            
                     valid_affils.append(affil)
+                    affil_of_interest += 1
         if affil_of_interest > 0:
             valid_ids.append(record['PMID'])     
-    #Should probably write this list to a file rather than screen print
-    print('Affiliations that remain and will be considered valid:')
-    print()
     valid_affils = list(set(valid_affils))
-    for i in valid_affils:
-        print(i)
-    return valid_ids 
+    #Should probably write this list to a file rather than screen print
+    #print('Affiliations that remain and will be considered valid:')
+    #print()
+    #for i in valid_affils:
+    #    print(i)
+    return valid_ids, valid_affils 
 
 def fetch_xml_records(valid_ids):
     handle = Entrez.efetch(db="pubmed", id=valid_ids, rettype="medline",
@@ -104,7 +104,7 @@ def fetch_xml_records(valid_ids):
     xml_records = Entrez.read(handle)
     return xml_records
 
-def construct_df(xml_records):
+def construct_df(xml_records, valid_affils):
     '''
     
     '''
@@ -144,7 +144,7 @@ def construct_df(xml_records):
             name = (person['LastName']+' '+person['ForeName']).replace(' ', '_')
             affiliations = person['AffiliationInfo']
             for affiliation in affiliations:
-                if affiliation['Affiliation'] in possible_names:
+                if affiliation['Affiliation'] in valid_affils:
                     affil_author=True
             if affil_author:
                 affil_authors += 1
@@ -153,20 +153,26 @@ def construct_df(xml_records):
         n_authors.append(total_authors)
         n_affil_authors.append(affil_authors)
         affil_author_names.append('; '.join(affil_author_list))
-        pubs_df = pd.DataFrame(zip(pmids, titles, dois, journals, years_journal, volumes, issues, n_authors, n_affil_authors, affil_author_names),\
-                columns = ['PMID', 'Title', 'DOI', 'Journal', 'Year', 'Volume', 'Issue',\
-                'Total_author_count', 'Affiliated_author_count', 'Affiliated_author_names'])
-        return pubs_df
+    pubs_df = pd.DataFrame(zip(pmids, titles, dois, journals, years_journal, volumes, issues, n_authors, n_affil_authors, affil_author_names),\
+            columns = ['PMID', 'Title', 'DOI', 'Journal', 'Year', 'Volume', 'Issue',\
+            'Total_author_count', 'Affiliated_author_count', 'Affiliated_author_names'])
+    return pubs_df
 
-if __name__ == 'main':
+if __name__ == '__main__':
     #Obvs need to get argparser working here
 
-    filter_file = '{}/{}_removal.txt'.format(infile_directory, '_'.join(search_term.split(' '))
+    ###Read in a list of affiliation strings to remove from a file, or empty list if it doesn't exist
+    filter_file = '{}/search_filters/{}_removal.txt'.format(infile_directory, '_'.join(search_term.split(' ')))
     filtered_affils = read_filter_file(filter_file)
+    ###Establish how many records to grab
     max_records = get_max_pubmed_records(search_term)
+    print('Getting {} records matching {}'.format(max_records, search_term))
     medline_records = gather_medline_records(search_term, max_records)
-    valid_ids = filter_results(search_term, medline_records, filtered_affils)
-    xml_records = fetcm_xml_records(valid_ids)
-    pubs_df = construct_df(xml_records)
+    print('Number of medline records found: {}'.format(len(medline_records)))
+    valid_ids, valid_affils = filter_results(search_term, medline_records, filtered_affils)
+    print('Total valid IDs to fetch XML for: {}'.format(len(valid_ids)))
+    xml_records = fetch_xml_records(valid_ids)
+    pubs_df = construct_df(xml_records, valid_affils)
     pubs_df = pubs_df.sort_values('Year', ascending=False)
+    print('Shape of resulting dataframe: {}'.format(pubs_df.shape))
     pubs_df.to_csv('{}/{}.tsv'.format(outfile_directory, '_'.join(search_term.split(' '))), index=False, sep='\t')
