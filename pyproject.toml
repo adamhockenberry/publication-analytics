@@ -8,6 +8,7 @@ authors = ["Adam J Hockenberry"]
 python = "^3.8"
 pandas = "^1.4.2"
 biopython = "^1.79"
+python-dotenv = "^0.20.0"
 
 [tool.poetry.dev-dependencies]
 

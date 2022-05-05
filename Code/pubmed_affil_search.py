@@ -1,9 +1,13 @@
 from Bio import Entrez, Medline
 import pandas as pd
+import os
+
+from dotenv import load_dotenv
+load_dotenv()
 
 
 #temp placeholders while being lazy about argparse
-Entrez.email = 'adam.hockenberry@tempus.com'
+Entrez.email = os.environ.get('PUBMED_EMAIL') 
 search_term = 'tempus'
 #search_term = 'guardant'
 infile_directory = '../Data'
