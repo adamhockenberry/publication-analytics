@@ -5,8 +5,6 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-
-#temp placeholders while being lazy about argparse
 Entrez.email = os.environ.get('PUBMED_EMAIL') 
 search_term = 'tempus'
 #search_term = 'guardant'
@@ -51,8 +49,7 @@ def gather_medline_records(search_term, max_records):
     handle.close()
     id_list = record['IdList']
     assert len(id_list) == max_records 
-    
-    #Do a fetch to return the text data for each record
+    #Perform a fetch to return the text data for each record
     handle = Entrez.efetch(db="pubmed", id=id_list, rettype="medline",
                             retmode="text")
     medline_records = list(Medline.parse(handle))
@@ -61,6 +58,8 @@ def gather_medline_records(search_term, max_records):
 
 def read_filter_file(filter_file):    
     '''
+    Reading in a defined set of invalid affiliations from a file.
+
     Inputs:
         filter_file : str (path to existing file)
     Outputs:
@@ -78,10 +77,25 @@ def read_filter_file(filter_file):
 
 def filter_results(search_term, medline_records, filtered_affils):
     '''
+    Scans through all affiliations to identify possible hits, while purposefully removing a subset
+    of affiliations that have been previously defined.
+
+    Inputs:
+        search_term : str
+        medline_records : list of records from pubmed results
+        filtered_affils : list of affiliations to ignore/remove
+    
+    Outputs:
+        valid_ids : list of ids(ints)
+        valid_affils : list of affils (strs)
+
+    Writes:
+        valid_affils to file
 
     '''
     valid_affils = []
     valid_ids = []
+    ###Ideally can remove this triple for loop
     for record in medline_records:
         affil_of_interest = 0
         for affil in record['AD']:
@@ -95,14 +109,22 @@ def filter_results(search_term, medline_records, filtered_affils):
         if affil_of_interest > 0:
             valid_ids.append(record['PMID'])     
     valid_affils = list(set(valid_affils))
-    #Should probably write this list to a file rather than screen print
-    #print('Affiliations that remain and will be considered valid:')
-    #print()
-    #for i in valid_affils:
-    #    print(i)
+    with '{}/{}_valid_affiliations.txt'.format(outfile_directory, '_'.join(search_term.split(' '))) as outfile:
+        for affil in valid_affils:
+            outfile.write(affil + '\n')
     return valid_ids, valid_affils 
 
 def fetch_xml_records(valid_ids):
+    '''
+    Bulk fetching of xml records from id list using pubmed
+
+    Inputs:
+        valid_ids : list of ids (ints)
+
+    Outputs:
+        xml_records : list of xml records
+
+    '''
     handle = Entrez.efetch(db="pubmed", id=valid_ids, rettype="medline",
                         retmode="xml")
     xml_records = Entrez.read(handle)
@@ -111,6 +133,11 @@ def fetch_xml_records(valid_ids):
 def construct_df(xml_records, valid_affils):
     '''
     
+    Inputs:
+
+    Outputs:
+
+
     '''
     pmids = []
     titles = []
