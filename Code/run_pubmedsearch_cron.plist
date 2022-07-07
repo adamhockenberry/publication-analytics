@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>pubmed_search_tempus</string>
+    <key>ProgramArguments</key>
+    <array>
+            <string>/Users/adam.hockenberry/Library/Caches/pypoetry/virtualenvs/publication-analytics-Zedul9C6-py3.8/bin/python</string>
+            <string>/Users/adam.hockenberry/Projects/publication-analytics/Code/pubmed_affil_search_update.py</string>
+    </array>
+</dict>
+</plist>
